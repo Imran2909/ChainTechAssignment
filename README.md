@@ -4,23 +4,6 @@
 
 This is a Node.js-based Task Management Application with JWT authentication, task creation, task editing, status updates, and task deletion. Users can sign up, log in, and manage their tasks with due dates and statuses. The app uses MongoDB as a database to store users and tasks.
 
-## **Table of Contents**
-
-1. [Features](#features)
-2. [Prerequisites](#prerequisites)
-3. [Installation](#installation)
-4. [Environment Variables](#environment-variables)
-5. [Running the Application](#running-the-application)
-6. [API Endpoints](#api-endpoints)
-   - [User Routes](#user-routes)
-   - [Task Routes](#task-routes)
-7. [Error Handling](#error-handling)
-8. [Bonus Features](#bonus-features)
-9. [Folder Structure](#folder-structure)
-10. [Code Implementation](#code-implementation)
-
----
-
 ## **Features**
 
 - **User Signup & Login** with hashed passwords.
@@ -32,16 +15,6 @@ This is a Node.js-based Task Management Application with JWT authentication, tas
 
 ---
 
-## **Prerequisites**
-
-Before you begin, ensure you have met the following requirements:
-
-- **Node.js** (>= 14.x.x) and **npm** installed on your local machine.
-- **MongoDB** installed locally or a cloud MongoDB connection string.
-- A text editor or IDE (like Visual Studio Code) for writing and viewing code.
-
----
-
 ## **Installation**
 
 Follow these steps to set up and run the application on your local device:
@@ -49,7 +22,7 @@ Follow these steps to set up and run the application on your local device:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/yourusername/ChainTechAssignment.git
+   git clone https://github.com/Imran2909/ChainTechAssignment.git
 
 2. **Navigate to the project directory:**
 
@@ -67,5 +40,86 @@ Ensure MongoDB is running locally or use a cloud-based MongoDB connection string
 ---
 
 ## **Environment Variables**
+ - Set up MongoDB and configure environment variables in a .env file:
+Create a .env file and keep your variable
+    ```bash
+    MONGO_URL = // Add your mongodb url here   
+
+## API Reference
+
+#### Signup 
+
+```http
+  POST /user/signup
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `username` | `string` | **Required**.  |
+| `password` | `string` | **Required**.  |
+
+#### Login
+
+```http
+  GET /user/login
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `username` | `string` | **Required**.  |
+| `password` | `string` | **Required**.  |
 
 
+#### Post / create a new task
+
+```http
+  POST /task/tasks
+```
+This require 'Authorization' in headers and as its value you have to put a token which you will get after login.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `title` | `string` | **Required**.  |
+| `descriptiom` | `string` | **Not compulsary**.  |
+
+
+#### Get all tasks
+
+```http
+  GET /task/tasks
+```
+This require 'Authorization' in headers and as its value you have to put a token which you will get after login.
+
+
+#### Change task status
+
+```http
+  PATCH /task/changeStatus/:id
+```
+This require 'Authorization' in headers and as its value you have to put a token which you will get after login.
+
+
+#### Edit task
+
+```http
+  PUT /task/tasks/:id
+```
+This require 'Authorization' in headers and as its value you have to put a token which you will get after login.
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `title` | `string` | **Not compulsary**.  |
+| `descriptiom` | `string` | **Not compulsary**.  |
+| `status` | `string` | **Not compulsary**.  |
+| `dueDate` | `string` | **Not compulsary**.  |
+
+
+#### Delete task
+
+```http
+  DELETE /task/tasks/:id
+```
+This require 'Authorization' in headers and as its value you have to put a token which you will get after login.
+
+## **API Documentation**
+The API documentation is created on Swagger you can visualize with /api-docs/
+ ```bash
+    http://localhost:8080/api-docs/
